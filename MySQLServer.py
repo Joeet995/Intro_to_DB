@@ -6,14 +6,15 @@ try:
         user = "root",
         password = "Youssef95"
     )
+    mycursor = mydb.cursor()
+    mycursor.execute("CREATE DATABASE IF NOT EXISTS alx_book_store")
+    print("Database 'alx_book_store' created successfully!")
 
 except mysql.connector.Error as error:
     print(f"{error}")
 
-mycursor = mydb.cursor()
-
-mycursor.execute("CREATE DATABASE IF NOT EXISTS alx_book_store")
-
-print("Database 'alx_book_store' created successfully!")
-
-mycursor.close()
+finally:
+    if "mycursor" in locals():
+        mycursor.close()
+    if "mydb" in locals():
+        mydb.close()
